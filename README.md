@@ -1,2 +1,2 @@
-# dots-arch
-My Arch installation dotfiles
+# Arch Dotfiles
+My Arch installation dotfiles with (Qtile window manager)
