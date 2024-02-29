@@ -1,0 +1,58 @@
+import = ["/home/sahil/.config/alacritty/colors.toml", "/home/sahil/.config/alacritty/fonts.toml"]
+live_config_reload = true
+
+[colors.bright]
+black = "#4C566A"
+blue = "#81A1C1"
+cyan = "#8FBCBB"
+green = "#A3BE8C"
+magenta = "#B48EAD"
+red = "#BF616A"
+white = "#ECEFF4"
+yellow = "#EBCB8B"
+
+[colors.normal]
+black = "#3B4252"
+blue = "#81A1C1"
+cyan = "#88C0D0"
+green = "#A3BE8C"
+magenta = "#B48EAD"
+red = "#BF616A"
+white = "#E5E9F0"
+yellow = "#EBCB8B"
+
+[colors.primary]
+background = "#D9DFD0"
+foreground = "#D8DEE9"
+
+[cursor]
+unfocused_hollow = false
+
+[cursor.style]
+blinking = "on"
+shape = "Block"
+
+[env]
+TERM = "alacritty"
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+[font.offset]
+x = 0
+y = 0
+
+[window]
+decorations = "none"
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.85
+startup_mode = "Windowed"
+
+[window.dimensions]
+columns = 84
+lines = 24
+
+[window.padding]
+x = 5
+y = 0
+
+
