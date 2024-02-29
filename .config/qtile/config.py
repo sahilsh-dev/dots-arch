@@ -95,10 +95,6 @@ keys = [
     Key([mod], "b", lazy.spawn("brave"), desc="Open Browser"),
     Key([ctrl], "space", lazy.spawn("dunstctl close"), desc="Close notifications"),
     Key([mod], "z", float_to_front),       
-
-    # Scratchpads
-    Key([mod, ctrl], "1", lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod, ctrl], "2", lazy.group['scratchpad'].dropdown_toggle('kdeconnect')),
 ]
 
 
