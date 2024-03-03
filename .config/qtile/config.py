@@ -8,7 +8,6 @@ ctrl = "control"
 terminal = "alacritty"
 colors, backgroundColor, foregroundColor, workspaceColor, chordColor = colors.nord()
 
-
 @lazy.function
 def float_to_front(qtile):
     for group in qtile.groups:
@@ -20,7 +19,6 @@ def float_to_front(qtile):
 def switchtogroup(group, window):
     group.cmd_toscreen()
 
-
 def _bar(qtile):
     # Get the bar 
     bar = qtile.current_screen.top
@@ -29,18 +27,21 @@ def _bar(qtile):
         bar.show(False)
     else:
         bar.show(True)
+
 @hook.subscribe.layout_change
 def layout_change(layout,group):
     _bar(qtile)
+
 @hook.subscribe.changegroup
 def group_change():
     _bar(qtile)
+
 @hook.subscribe.client_focus
 def focus_change(window):
     _bar(qtile)
 
-# █▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄ █▀
-# █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ ▄█
+
+########## Keybindings #########
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -75,8 +76,6 @@ keys = [
 
     # Launch powermenu
     Key([mod], "p", lazy.spawn(".config/rofi/scripts/powermenu_t4")),
-    # Key([mod], "t", lazy.spawn("sh -c ~/.config/rofi/scripts/themes"), desc='theme_switcher'),
-
 
     Key([], "XF86AudioRaiseVolume", lazy.spawn("/home/sahil/.local/bin/changevolume up"), desc='Volume Up'),
     Key([], "XF86AudioLowerVolume", lazy.spawn("/home/sahil/.local/bin/changevolume down"), desc='volume down'),
@@ -87,7 +86,6 @@ keys = [
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 10%+"), desc='brightness UP'),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10%-"), desc='brightness Down'),
     Key([mod],"e", lazy.spawn("thunar"), desc='file manager'),
-	# Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
     Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
 
     Key([mod], "v", lazy.spawn("code"), desc="Open VS Code"),
@@ -107,8 +105,7 @@ with open(colors_file, 'r') as file:
         py_colors.append(file.readline().strip())
 
 
-# █▀▀ █▀█ █▀█ █░█ █▀█ █▀
-# █▄█ █▀▄ █▄█ █▄█ █▀▀ ▄█
+########## Groups #########
 
 groups = [
     Group("1", matches=[Match(wm_class="brave")], layout="max"),
@@ -143,6 +140,7 @@ for i in groups:
 
 
 ######### LAYOUTS #########
+
 layout_theme = {
         "margin":5,
         "border_width": 4,
@@ -166,8 +164,7 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 
-# █▄▄ ▄▀█ █▀█
-# █▄█ █▀█ █▀▄
+########## BAR #########
 
 screens = [
     Screen ( 

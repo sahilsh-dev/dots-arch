@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Apply wallpaper using wal
-# wal -i Pictures/backgrounds/city_cyber.png
-wal -i ~/Programs/My-Wallpaper/181.jpg
+wal -i wallpaper.jpg
 
 setxkbmap -option caps:swapescape
 
@@ -17,7 +16,6 @@ dbus-update-activation-environment --all
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 gnome-keyring-daemon --start --components=secrets
 
-# nm-applet &
 xset b off
 thunar --daemon &
 nm-applet &
