@@ -108,7 +108,7 @@ with open(colors_file, 'r') as file:
 ########## Groups #########
 
 groups = [
-    Group("1", matches=[Match(wm_class="brave")], layout="max"),
+    Group("1", matches=[Match(wm_class="brave-browser")]),
     Group("2", matches=[Match(wm_class="")]),
     Group("3", matches=[Match(wm_class="code-oss")]),
     Group("4", matches=[Match(wm_class="thunar")]),
