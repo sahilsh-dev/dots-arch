@@ -1,16 +1,17 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Paths
-export ZSH=/usr/share/oh-my-zsh/
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME="archcraft"
+# Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -24,11 +25,11 @@ export ZSH=/usr/share/oh-my-zsh/
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 7
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -72,11 +73,18 @@ zstyle ':omz:update' frequency 7
 plugins=(
     git
     zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-completions
     sudo
-    web-search
 )
 
-source /usr/share/oh-my-zsh/oh-my-zsh.sh
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+source $ZSH/oh-my-zsh.sh
+
+
+export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.config/rofi/scripts:$PATH
+
 
 # User configuration
 
@@ -96,71 +104,64 @@ source /usr/share/oh-my-zsh/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# On-demand rehash
-zshcache_time="$(date +%s%N)"
+# Defaults
+export HARDWARECLOCK=localtime
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="brave"
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export TERM="alacritty"
+export CHROME_EXECUTABLE=/usr/bin/brave
 
-autoload -Uz add-zsh-hook
-
-rehash_precmd() {
-  if [[ -a /var/cache/zsh/pacman ]]; then
-    local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
-    if (( zshcache_time < paccache_time )); then
-      rehash
-      zshcache_time="$paccache_time"
-    fi
-  fi
-}
-
-add-zsh-hook -Uz precmd rehash_precmd
-
-# omz
-alias zshconfig="geany ~/.zshrc"
-alias ohmyzsh="thunar ~/.oh-my-zsh"
-
-# ls
-alias l='ls -lh'
-alias ll='ls -lah'
-alias la='ls -A'
-alias lm='ls -m'
-alias lr='ls -R'
-alias lg='ls -l --group-directories-first'
+alias l='exa -lh'
+alias ll='exa -lah'
+alias lm='exa -m'
+alias lr='exa -R'
+alias lg='exa -l --group-directories-first'
 
 # git
 alias gcl='git clone --depth 1'
 alias gi='git init'
 alias ga='git add'
 alias gc='git commit -m'
-alias gp='git push origin master'
+alias gp='git push'
+alias gch='git checkout'
+alias gs='git status'
+alias gl='git log'
 
-#custom alias
+#custom
 alias nf="neofetch"
-alias pf="pfetch"
 alias lc="sudo lenovo_control.sh"
 alias ta="task add"
-alias c="/usr/bin/code"
 
-#custom stuff
-file_explorer() {
-    selected_directory=$(find ~/.config ~/Documents/VS_Code_Files ~/Programs ~/Code -mindepth 1 -maxdepth 2 -type d | fzf)
+alias dcu="docker compose up --build"
+alias dcd="docker compose down"
+alias dcl="docker container ls"
+alias di="docker images"
+alias dr="docker run"
+alias dri="docker run -it"
+alias dbt="docker build -t"
+alias dei="docker exec -it"
+
+explorer_nvim() {
+    selected_directory=$(find ~/.config ~/Programs ~/Code -mindepth 1 -maxdepth 3 | fzf)
     
     if [ -n "$selected_directory" ]; then
         cd "$selected_directory"
           nvim . -c "NvimTreeToggle"
-#        c .
     fi
 }
-bindkey -s '^F' 'file_explorer\n'
 
-cat ~/.cache/wal/sequences
+bindkey -s '^F' 'explorer_nvim\n'
 
 eval "$(starship init zsh)"
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
-export CHROME_EXECUTABLE=/usr/bin/brave
-source /home/sahil/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
