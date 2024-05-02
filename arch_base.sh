@@ -15,7 +15,7 @@ paru -S neovim picom brave-bin acpi_call flameshot thunar thunar-volman thunar-a
 xdg-user-dirs-update
 
 echo "Essential packages installed, now some extra packages..."
-paru -S npm tldr timeshift telegram-desktop discord libreoffice-fresh exa mpv kdeconnect nwg-look ocs-url timeshift noto-fonts ttf-fira-code ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-ms-fonts ttf-roboto tmux snapshot filelight btop pavucontrol obsidian
+paru -S npm tldr timeshift telegram-desktop discord libreoffice-fresh exa mpv kdeconnect nwg-look gvfs ocs-url timeshift noto-fonts ttf-fira-code ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-ms-fonts ttf-roboto tmux snapshot filelight btop pavucontrol obsidian
 
 echo "Installing NvChad, Run :MasonInstallAll command after lazy.nvim finishes downloading plugins..."
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
