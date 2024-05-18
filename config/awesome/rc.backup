@@ -224,7 +224,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
     local mymem = lain.widget.mem {
         settings = function ()
-            widget:set_markup("Mem " .. mem_now.used)
+            widget:set_markup("Mem " .. string.format("%.2f G", mem_now.used / 1024))
         end
     }
     local mybattery = lain.widget.bat {
@@ -233,6 +233,12 @@ awful.screen.connect_for_each_screen(function(s)
            widget:set_markup(bat_now.perc .. "% " .. bat_now.status)
         end
     }
+    -- local backlight = awful.widget.watch("brightnessctl", 20,
+    --     function(widget, stdout)
+    --         local perc = tonumber(stdout:match("%((%d+)%%%)"))
+    --         widget:set_text("Bt "..perc.."%")
+    --     end
+    -- )
 
     local separator = wibox.widget.textbox(" | ")
 
@@ -564,9 +570,13 @@ awful.rules.rules = {
       properties = { screen = 1, tag = "social" } },
     { rule = { name = "WhatsApp Web" },
       properties = { screen = 1, tag = "social" } },
-    { rule = { class = "Soffice" } ,
+    { rule_any = { instance = {
+        "libreoffice",
+        "libreoffice-calc",
+        "libreoffice-writer"
+      } } ,
       properties = { screen = 1, tag = "docs" } },
-    { rule_any = { class = {"Gimp*", "thunderbird"} },
+    { rule = { class = "Gimp*" },
       properties = { screen = 1, tag = "9" } },
 }
 -- }}}

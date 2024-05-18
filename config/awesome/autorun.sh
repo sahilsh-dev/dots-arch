@@ -8,6 +8,8 @@ dbus-update-activation-environment --all
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # gnome-keyring-daemon --start --components=secrets
 
+setxkbmap -option "caps:swapescape"
+
 picom -b
 nitrogen --restore &
 xset b off
